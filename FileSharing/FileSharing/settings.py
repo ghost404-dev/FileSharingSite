@@ -75,7 +75,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'FileSharing.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # Для тестов в браузере
+        'rest_framework.authentication.TokenAuthentication',    # Для токен-авторизации
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # По умолчанию доступ только авторизованным
+    ],
+}
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
