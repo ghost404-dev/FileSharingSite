@@ -3,7 +3,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.routers import DefaultRouter
-from .views import FileViewSet, UserRegisterView, FileDeleteView, FileDownloadView
+from .views import FileViewSet, UserRegisterView, FileDeleteView, FileDownloadView, generate_link, access_shared_file
 from django.urls import path
 
 
@@ -26,12 +26,14 @@ router.register(r'files', FileViewSet, basename='file')
 
 urlpatterns = router.urls
 
+
 urlpatterns += [
     path('register/', UserRegisterView.as_view(), name='register'),
     path('files/<int:file_id>/delete/', FileDeleteView.as_view(), name='file-delete'),
     path('files/<int:file_id>/download/', FileDownloadView.as_view(), name='file-download'),
-
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('generate-link/<int:file_id>/', generate_link, name='generate_link'),
+    path('files/<uuid:shared_link>/shared/', access_shared_file, name='access_shared_file'),  # Исправлено на uuid
 ]

@@ -5,4 +5,4 @@ from .models import File
 @admin.register(File)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('user','filename','file_type') 
-    list_filter = ('user',)
+    list_filter = ('file_type',)

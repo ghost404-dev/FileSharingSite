@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доступ к файлу</title>
+</head>
+<body>
+    <h1>Доступ к файлу</h1>
+    <form method="GET" action="{% url 'access_shared_file' shared_link=shared_link %}">
+        <label for="password">Введите пароль (если требуется):</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Получить файл</button>
+    </form>
+</body>
+</html>
